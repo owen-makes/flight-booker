@@ -1,0 +1,30 @@
+<div>
+  <h1 class="font-bold text-4xl">Flight Search</h1>
+  <%= form_with url: "/flights", method: :get do |form| %>
+    <%= form.label :departure_airport_code, "Departure Airport" %>
+    <%= form.collection_select :search_departure_airport_code,
+        @airports,
+        :airport_code,
+        :airport_code,
+        { prompt: "Select escaping airport"} %>
+   
+    <%= form.label :departure_airport_id, "Departure Airport" %>
+    <%= form.collection_select :search_arrival_airport_id,
+        @airports,
+        :id,
+        :airport_code,
+        { prompt: "Select your escape"} %>
+
+    <%= form.label :date %>
+    <%= form.date_field :date %>
+
+
+    <%= form.submit "Search" %>
+  <% end %>
+  <ul>
+    <% @flights.each do |f|%>
+      <li><%= f.id %></li>
+    <% end %>
+  </ul>
+
+</div>
