@@ -9,8 +9,10 @@ class Flight < ApplicationRecord
     flights = flights.where(departure_airport_id: params[:departure_airport_id]) if params[:departure_airport_id].present?
     flights = flights.where(arrival_airport_id: params[:arrival_airport_id]) if params[:arrival_airport_id].present?
 
-    # For the date, use the month/year search we created earlier
+    # For the date, use the month/year
     flights = flights.search_by_month(params[:date]) if params[:date].present?
+
+    flights = flights.where("seats_available >= ?", params[:seats_available])
 
     flights  # Return the filtered results
   end

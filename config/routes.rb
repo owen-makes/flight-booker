@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "bookings/new"
   get "/flights", to: "flights#index"
   get "flights/show"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -42,7 +42,8 @@
             departure_airport: departure_airport,
             arrival_airport: arrival_airport,
             date: date.to_datetime + rand(6..22).hours + [ 0, 15, 30, 45 ].sample.minutes,
-            duration: flight_durations[duration_category].sample
+            duration: flight_durations[duration_category].sample,
+            seats_available: rand(1..100).to_i
           )
         end
       end

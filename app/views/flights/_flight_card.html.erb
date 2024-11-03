@@ -1,10 +1,11 @@
-<div class="flex p-4 mt-4 mb-4 bg-gray-100 rounded-lg shadow">
+<div class="flex p-4 mt-4 mb-4 bg-gray-100 rounded-lg shadow grow">
   <div class="flex flex-col">
     <div class="flex items-center space-x-2">
       <span class="font-bold"><%= flight.departure_airport.airport_code %></span>
       <span>→</span>
       <span class="font-bold"><%= flight.arrival_airport.airport_code %></span>
       <span class="text-gray-600"><%= flight.duration.strftime("%Hh %mm") %></span>
+      <span class="text-gray-600 ml-auto">💺: <%= flight.seats_available %></span>
     </div>
     <div class="text-gray-600 text-sm">
       <%= flight.date.strftime("%B %d, %Y") %>
