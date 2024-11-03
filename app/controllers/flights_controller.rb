@@ -1,7 +1,11 @@
 class FlightsController < ApplicationController
   def index
     @airports = Airport.order(:airport_code)
-    @flights = params[:search] ? Flight.search(params[:search]) : Flight.none
+    @flights = if params[:departure_airport_id] || params[:arrival_airport_id] || params[:date]
+      Flight.search(params)
+    else
+      Flight.none
+    end
   end
 
   def show
