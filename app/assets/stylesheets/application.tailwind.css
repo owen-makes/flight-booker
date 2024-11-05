@@ -2,12 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
+@layer base {
+  html {
+    @apply bg-base-paper text-base-900;
+  }
+  
+  /* Optional: Style links by default */
+  a {
+    @apply text-blue hover:text-blue-light;
+  }
 
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  /* Optional: Style headings by default */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-base-black;
   }
 }
 
-*/
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-orange;
+  }
+}
+
+

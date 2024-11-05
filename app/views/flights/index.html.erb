@@ -1,21 +1,21 @@
 <div>
-  <h1 class="font-bold text-4xl mb-5">Flight Search</h1>
+  <h1 class="font-bold text-4xl mb-5 text-black font-mono">Flight Search</h1>
   <%= form_with url: "/flights", method: :get do |form| %>
-    <%= form.label :departure_airport_code, "Departure Airport" %>
+    <%= form.label :departure_airport_code, "Departure Airport", class: "text-base-900" %>
     <%= form.collection_select :departure_airport_id,
         @airports,
         :id,
         :airport_code,
         { prompt: "Select escaping airport"} %>
    
-    <%= form.label :departure_airport_id, "Departure Airport" %>
+    <%= form.label :arrival_airport_id, "Arrival Airport", class: "text-base-900" %>
     <%= form.collection_select :arrival_airport_id,
         @airports,
         :id,
         :airport_code,
         { prompt: "Select your escape"} %>
 
-    <%= form.label :date, "Escape Date" %>
+    <%= form.label :date, "Escape Date", class: "text-base-900" %>
     <%= form.select :date,
         options_from_collection_for_select(
           Flight.get_flight_dates,
@@ -24,29 +24,31 @@
         ),
         { prompt: "Select date" } %>
 
-    <%= form.label :seats_available, "Passengers" %>
+    <%= form.label :seats_available, "Passengers", class: "text-base-900" %>
     <%= form.select :seats_available,
                     [["👤 1", 1], ["👤 2", 2], ["👤 3", 3], ["👤 4", 4]] %>
 
 
-    <%= form.submit "Search", class: "mt-5 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors" %>
+    <%= form.submit "Search", class: "mt-5 px-4 py-2 bg-red text-white rounded hover:bg-red-light transition-colors" %>
   <% end %>
   <%= form_with url: "/booking/new", method: :get do |form| %>
     <div class="">
       <% @flights.each do |f| %>
         <div class="flex items-center space-x-4">
           <div class="flex items-center">
-            <%= form.radio_button :flight_id, f.id, class: "h-4 w-4 text-blue-600" %>
+            <%= form.radio_button :flight_id, f.id, class: "h-4 w-4 text-red-light" %>
           </div>
           <%= render "flight_card", flight: f %>
         </div>
       <% end %>
     </div>
     
-    <div class="mt-5">
-      <%= form.submit "Select Flight", 
-          class: "mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors" %>
-    </div>
+    <% unless @flights.empty? %>
+      <div class="mt-5">
+        <%= form.submit "Select Flight", 
+            class: "mb-4 px-4 py-2 bg-cyan text-white rounded hover:bg-cyan-light transition-colors" %>
+      </div>
+    <% end %>
   <% end %>
 
 </div>
