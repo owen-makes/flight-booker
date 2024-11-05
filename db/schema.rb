@@ -10,11 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_03_025656) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_05_235023) do
   create_table "airports", force: :cascade do |t|
     t.string "airport_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "flight_id"
+    t.integer "passenger_id"
+    t.index ["flight_id"], name: "index_bookings_on_flight_id"
+    t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
+  end
+
+  create_table "bookings_passengers", id: false, force: :cascade do |t|
+    t.integer "booking_id"
+    t.integer "passenger_id"
+    t.index ["booking_id", "passenger_id"], name: "index_bookings_passengers_on_booking_id_and_passenger_id", unique: true
+    t.index ["booking_id"], name: "index_bookings_passengers_on_booking_id"
+    t.index ["passenger_id"], name: "index_bookings_passengers_on_passenger_id"
   end
 
   create_table "flights", force: :cascade do |t|
@@ -27,6 +44,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_025656) do
     t.integer "seats_available"
     t.index ["arrival_airport_id"], name: "index_flights_on_arrival_airport_id"
     t.index ["departure_airport_id"], name: "index_flights_on_departure_airport_id"
+  end
+
+  create_table "passengers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "flights", "airports", column: "arrival_airport_id"
