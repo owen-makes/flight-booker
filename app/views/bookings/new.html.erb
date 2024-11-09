@@ -1,4 +1,42 @@
 <div>
-  <h1 class="font-bold text-4xl">Bookings#new</h1>
-  <p>Find me in app/views/bookings/new.html.erb</p>
+  <h1 class="font-bold text-4xl">Booking Flight #<%= @flight.id %></h1>
+  <h2 class="font-bold text-gray-600 mt-1 text-2xl">
+    <%= @flight.departure_airport.airport_code %>
+    <span class="text-cyan">→</span>
+    <%= @flight.arrival_airport.airport_code %>    
+  </h2>
+  <h2 class="text-gray-600 my-2 text-large">
+    <%= @flight.date.strftime("%B %d, %Y") %>
+  </h2>
+
+  <%= form_with model: @booking do |form| %>
+    <%= form.hidden_field :flight_id, value: @flight.id %>
+    
+    <div class="space-y-4">
+      <%= form.fields_for :passengers do |passenger_form| %>
+        <div class="p-4 border rounded-lg">
+          <h3 class="font-semibold mb-2">Passenger #<%= passenger_form.index + 1 %></h3>
+          
+          <div class="space-y-2">
+            <div>
+              <%= passenger_form.label :name, "Name", class: "block text-sm font-medium text-gray-700" %>
+              <%= passenger_form.text_field :name, 
+                  class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan focus:ring-cyan" %>
+            </div>
+            
+            <div>
+              <%= passenger_form.label :email, "Email", class: "block text-sm font-medium text-gray-700" %>
+              <%= passenger_form.email_field :email, 
+                  class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-cyan focus:ring-cyan" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="mt-5">
+      <%= form.submit "Confirm Reservation",
+          class: "mb-4 px-4 py-2 bg-cyan text-white rounded hover:bg-cyan-light transition-colors" %>
+    </div>
+  <% end %>
 </div>

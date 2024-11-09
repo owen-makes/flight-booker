@@ -31,11 +31,12 @@
 
     <%= form.submit "Search", class: "mt-5 px-4 py-2 bg-red text-white rounded hover:bg-red-light transition-colors" %>
   <% end %>
-  <%= form_with url: "/booking/new", method: :get do |form| %>
+  <%= form_with url: "/bookings/new", method: :get do |form| %>
     <div class="">
       <% @flights.each do |f| %>
         <div class="flex items-center space-x-4">
           <div class="flex items-center">
+            <%= form.hidden_field :seats_available, value: params[:seats_available] %>
             <%= form.radio_button :flight_id, f.id, class: "h-4 w-4 text-red-light" %>
           </div>
           <%= render "flight_card", flight: f %>
