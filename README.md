@@ -8,3 +8,12 @@ Build a typical airline booking flow:
   4. Enter billing information
 
 See more details [here](https://www.theodinproject.com/lessons/ruby-on-rails-flight-booker)
+
+## My solution
+
+Some screenshots of the finished project below:
+![flight search](image.png)
+
+![flight reservation](image-1.png)
+
+![booking confirmation](image-2.png)
