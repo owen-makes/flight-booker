@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <style>
+        /* Reset styles for email clients */
+        body, p, div, h1, h2 {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #0891b2;
+            color: #ffffff;
+            padding: 24px;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            padding: 24px;
+        }
+        .flight-details {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .passenger-card {
+            background-color: #f9fafb;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #0891b2;
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .text-small {
+            font-size: 14px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Here's your confirmation <%= @booking.passengers.first.name %></h1>
+        <div class="card">
+            <div class="header">
+                <h1>Booking Confirmation #<%= @booking.id %></h1>
+                <p>Thank you for booking with us!</p>
+            </div>
+            
+            <div class="content">
+                <div class="flight-details">
+                    <h2>Flight Details</h2>
+                    <table width="100%" style="margin: 20px 0;">
+                        <tr>
+                            <td align="center" width="40%">
+                                <strong style="font-size: 24px;"><%= @booking.flight.departure_airport.airport_code %></strong>
+                            </td>
+                            <td align="center" width="20%">→</td>
+                            <td align="center" width="40%">
+                                <strong style="font-size: 24px;"><%= @booking.flight.arrival_airport.airport_code %></strong>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="text-align: right;">
+                        <p class="text-small">Flight Date</p>
+                        <p><strong><%= @booking.flight.date.strftime("%B %d, %Y") %></strong></p>
+                        <p class="text-small">Departure Time</p>
+                        <p><strong><%= @booking.flight.date.strftime("%I:%M %p") %></strong></p>
+                    </div>
+                </div>
+
+                <h2>Passenger Information</h2>
+                <% @booking.passengers.each_with_index do |passenger, index| %>
+                    <div class="passenger-card">
+                        <p><strong>Passenger #<%= index + 1 %></strong></p>
+                        <p><%= passenger.name %></p>
+                        <p class="text-small"><%= passenger.email %></p>
+                        <div style="background-color: #ecfeff; color: #155e75; display: inline-block; padding: 4px 12px; border-radius: 9999px; margin-top: 8px;">
+                            Confirmed
+                        </div>
+                    </div>
+                <% end %>
+
+                <a href="#" class="button">Print Confirmation</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

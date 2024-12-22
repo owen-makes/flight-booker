@@ -1,0 +1,28 @@
+BOOKING CONFIRMATION
+
+Hello <%= @booking.passengers.first.name %>,
+
+Thank you for booking with us!
+
+Booking Confirmation #<%= @booking.id %>
+
+FLIGHT DETAILS
+-------------
+From: <%= @booking.flight.departure_airport.airport_code %>
+To: <%= @booking.flight.arrival_airport.airport_code %>
+
+Date: <%= @booking.flight.date.strftime("%B %d, %Y") %>
+Time: <%= @booking.flight.date.strftime("%I:%M %p") %>
+
+PASSENGER INFORMATION
+-------------------
+<% @booking.passengers.each_with_index do |passenger, index| %>
+Passenger #<%= index + 1 %>
+Name: <%= passenger.name %>
+Email: <%= passenger.email %>
+Status: Confirmed
+
+<% end %>
+To print your confirmation, please visit: [Print URL]
+
+This is an automated message. Please do not reply to this email.
